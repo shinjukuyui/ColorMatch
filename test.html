@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8">
+	    <meta http-equiv="Content-Script-type" content="text/javascript">  
+		<meta http-equiv="Content-Style-type" content="text/css">  
+		<script type="text/javascript" charset="UTF-8" src="./japanese.js"></script>
+		<script type="text/javascript" charset="UTF-8" src="./matchColors.js"></script>
+		<script type="text/javascript">
+// <![CDATA[
+window.onload = function() {
+	createColorTable();
+	var parent = document.getElementById("1");
+	var found = calculateNearColor("e2041b");
+	var title = new Array("Hue", "Saturation", "Value");
+	for (var i = 0; i < 3; i++) {
+		var headerElement = document.createElement("h2");
+		headerElement.appendChild(document.createTextNode("Match by " + title[i]));
+		parent.appendChild(headerElement);
+		var colorElements = document.createElement("ul");
+		for (var j = 0; j < 7; j++) {
+			if (found[i][j] != null) {
+				var colorElement = document.createElement("li");
+				colorElement.appendChild(document.createTextNode(found[i][j][0] + found[i][j][1]));
+				colorElements.appendChild(colorElement);
+			}
+		}
+		parent.appendChild(colorElements);
+	}
+}
+// ]]>
+		</script>
+		<title>MatchColors test</title>
+	</head>
+	<body>
+		<h1>Match Colors with '猩々緋' (#e2041b)</h1>
+		<div id="1">
+		</div>
+	</body>
+</html>
